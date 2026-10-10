@@ -19,8 +19,10 @@ bool findinstring(char c, std::string str);
 
 void movecursor(vector2 to);
 
-bool keypressed(char key);
+bool keypressed(int key);
 
 bool booleaninput(std::string in);
+
+void toggle(std::string sentence, int reference, int at);
 
 bool writeintable(std::string input, std::string word, int attempt);

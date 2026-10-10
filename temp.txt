@@ -1,0 +1,58 @@
+        if (nav == "wordle")
+        {
+            attempts = 1;
+            won = false;
+            system("cls");
+            cout << "\033[H"; // Move cursor to top left
+            printbg();
+            while (!won && attempts < 7)
+            {
+                movecursor({1, 14});
+                cout << "                                                                                                         ";
+                movecursor({1, 14});
+                answer = answer_input();
+                if (writeintable(answer, "quill", attempts))
+                {
+                    movecursor({1, 14});
+                    std::cout << "                                                       ";
+                    playanimation(you_won_anim, 1000, {1, 14});
+                    break;
+                }
+                attempts++;
+            }
+        }
+
+
+string answer_input()
+{
+    string input = "";
+    while (input.length() < 5)
+    {
+        char c = _getch();
+        if(c==0 || c==224){
+            _getch();
+            continue;
+        }
+        if (c >= 'a' && c <= 'z')
+        {
+            input += c;
+            cout << c;
+        }
+        else if (c >= 'A' && c <= 'Z')
+        {
+            input += c;
+            cout << c;
+        }
+        else if (c == '\b' && !input.empty())
+        {
+            input.pop_back();
+            cout << "\b \b";
+        }
+        cout<<"[" << int(c)<<"]";
+    }
+    return input;
+}
+
+        play
+        addwords
+        exit

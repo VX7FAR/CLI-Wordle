@@ -35,9 +35,9 @@ bool findinstring(char c, std::string str){
     }
 }
 
-bool keypressed(char key)
+bool keypressed(int key)
 {
-    return GetAsyncKeyState(key);
+    return GetAsyncKeyState(key) & 0x8000;
 }
 
 void movecursor(vector2 to){
@@ -53,6 +53,15 @@ bool booleaninput(std::string in)
     else
     {
         return false;
+    }
+}
+
+void toggle(std::string sentence, int reference, int at){
+    if(reference == at){
+        std::cout << "\033[36m> "<<sentence<<" <"<<std::endl;
+    }
+    else{
+        std::cout << "\033[0m"<<sentence<<""<<std::endl;
     }
 }
 

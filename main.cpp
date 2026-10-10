@@ -14,68 +14,83 @@ string random = "asdfg";
 // Take 5 digit input in terminal
 string answer_input()
 {
-    string input = "";
-    while (input.length() < 5)
+    while (true)
     {
-        char c = _getch();
-        if (c >= 'a' && c <= 'z')
-        {
-            input += c;
-            cout << c;
+        string input = "";
+        cout<< "\033[14;1H" << "Enter word: ";
+        cout<<"\033[14;13H"<<"\033[K"<<"\033[14;13H";
+        cin>>input;
+        if(input.size() != 5){
+            cout<< "\033[15;1H" << "Word must be 5 characters only";
         }
-        else if (c >= 'A' && c <= 'Z')
-        {
-            input += c;
-            cout << c;
-        }
-        else if (c == '\b' && !input.empty())
-        {
-            input.pop_back();
-            cout << "\b \b";
+        else{
+            cout<<"\033[15;1H"<<"\033[K";
+            return input;
         }
     }
-    return input;
+    
 }
+
+// input at 12,15
+// error at 1,16
 
 int main()
 {
     system("cls");
     string user_input;
     string answer;
-    string nav;
+    int nav = 0;
+    int oldnav = -1;
     int attempts = 1;
     bool won = false;
 
     while (true)
-    {
-        system("cls");
+    {   
+        cout<<"\033[H";         //Removes flickering
+        cout<<"\033[?25l";      //Hides cursor
         for(string s:LOGO){
             cout<<s<<endl;
         }
-        cout << "Go To: ";
-        cin >> nav;
-        if (nav == "wordle")
-        {
-            attempts = 1;
-            won = false;
-            system("cls");
-            cout << "\033[H"; // Move cursor to top left
-            printbg();
-            while (!won && attempts < 7)
-            {
-                movecursor({1, 14});
-                cout << "                                                                                                         ";
-                movecursor({1, 14});
-                answer = answer_input();
-                if (writeintable(answer, "quill", attempts))
+        cout << "Use UP/DOWN ARROW for moving and ENTER for selecting"<<endl;
+        if(keypressed(VK_UP)){
+            nav = 0;
+        }
+        else if(keypressed(VK_DOWN)){
+            nav = 1;
+        }
+        else if(keypressed(VK_RETURN)){
+            if (nav == 0){
+                answer = "";
+                attempts = 1;
+                won = false;
+                system("cls");
+                cout << "\033[H"; // Move cursor to top left
+                printbg();
+                while (!won && attempts < 7)
                 {
                     movecursor({1, 14});
-                    std::cout << "                                                       ";
-                    playanimation(you_won_anim, 1000, {1, 14});
-                    break;
+                    cout << "                                                                                                         ";
+                    movecursor({1, 14});
+                    answer = answer_input();
+                    if (writeintable(answer, "quill", attempts))
+                    {
+                        movecursor({1, 14});
+                        std::cout << "                                                       ";
+                        playanimation(you_won_anim, 1000, {1, 14});
+                        break;
+                    }
+                    attempts++;
                 }
-                attempts++;
             }
         }
+
+        if(oldnav != nav){
+            cout<<"\033[J";
+            toggle("PLAY", nav, 0);
+            toggle("QUIT", nav, 1);
+            oldnav = nav;
+        }
+
+        this_thread::sleep_for(chrono::milliseconds(80));
     }
 }
