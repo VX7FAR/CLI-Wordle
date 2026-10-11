@@ -111,7 +111,7 @@ int main()
         std::cout<<colour.cyan;
         movecursor({1,16});
         std::cout << "GUIDE: ";
-        std::cout << "Playing this is very simple each round the computer will generate a random 5 character word and you are supposed to guess what that word is in 6 attempts or less."<<endl;
+        std::cout << "Playing this is very simple each round the computer will generate a random 5 character word and you are supposed to guess what that word is in 6 attempts or less. Also the input should be in lowercase"<<endl;
         std::cout << "You start by taking a random or a calculated guess if your guess is correct then you win, if its wrong then there are 3 possibilities:\n"<<endl;
         std::cout << "- In the word you guessed none of the characters exist in the guessed word. For example `opera` and `quill` are two different words with no similarity." <<endl;
         std::cout << "- In the word you guessed, it has some or all characters as of the other word then the similar characters but in different position then it will be highlighted as cyan/blue colour. For example in `quill` and `lamar` both have the same character `l` and hence it will be highlighted." <<endl;

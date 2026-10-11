@@ -22,7 +22,27 @@ std::string bg[] = {
     "+---+---+---+---+---+"};
 
 std::vector<std::string> pool = {
-    "quill", "lamar", "queen"
+    "quill", "lamar", "queen", "brick", "storm",
+    "apple", "brave", "crane", "dance", "eagle",
+    "flame", "grape", "house", "ivory", "joker",
+    "knife", "lemon", "mango", "noble", "ocean",
+    "piano", "queen", "river", "stone", "tiger",
+    "ultra", "vivid", "water", "xenon", "youth",
+    "zebra", "angel", "bread", "cloud", "dream",
+    "earth", "frost", "ghost", "heart", "image",
+    "juice", "light", "magic", "night", "orbit",
+    "peace", "quick", "radio", "smile", "train",
+    "unity", "voice", "world", "yield", "zones",
+    "beach", "chair", "drive", "enjoy", "field",
+    "giant", "happy", "index", "judge", "known",
+    "laugh", "money", "never", "order", "plant",
+    "quiet", "round", "sweet", "table", "under",
+    "visit", "whole", "young", "adore", "block",
+    "charm", "count", "enter", "faith", "guide",
+    "honor", "input", "learn", "model", "power",
+    "reset", "serve", "trust", "value", "write",
+    "adapt", "blaze", "candy", "clear", "delay",
+    "event", "fresh", "globe", "ideal", "limit"
 };
 
 void printbg()
