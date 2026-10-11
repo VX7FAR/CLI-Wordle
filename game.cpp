@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include<random>
 #include "game.h"
 
+static std::random_device rd;
+static std::mt19937 gen(rd());
 std::string bg[] = {
     "+---+---+---+---+---+",
     "|   |   |   |   |   |",
@@ -18,12 +21,22 @@ std::string bg[] = {
     "|   |   |   |   |   |",
     "+---+---+---+---+---+"};
 
+std::vector<std::string> pool = {
+    "quill", "lamar", "queen"
+};
+
 void printbg()
 {
     for (std::string s : bg)
     {
         std::cout << s << std::endl;
     }
+}
+
+size_t randomgen(int min, int max){
+    std::uniform_int_distribution<size_t> dist(min, max);
+
+    return static_cast<size_t>(dist(gen));
 }
 
 bool findinstring(char c, std::string str){

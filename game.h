@@ -4,6 +4,8 @@
 
 extern std::string bg[];
 
+extern std::vector<std::string> pool;
+
 enum result{
     incorrect, correct, wrongposition
 };
@@ -22,6 +24,8 @@ struct quickascii{
     std::string cyan = "\033[36m";
     std::string reset = "\033[0m";
 };
+
+size_t randomgen(int min, int max);
 
 void printbg();
 
