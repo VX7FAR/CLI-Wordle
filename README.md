@@ -2,6 +2,8 @@
 
 Yknow the wordle game in discord where we are supposed to guess a random word by giving small hints?
 Thats what I made but it works in terminal and was made purely from C++ without any additional libraries.
+<img width="1473" height="797" alt="Screenshot 2026-10-11 074721" src="https://github.com/user-attachments/assets/677968e4-5e3e-416f-ba4a-3ca11d64cae8" />
+
 
 ## How to play?
 Playing this is very simple each round the computer will generate a random 5 character word and you are supposed to guess what that word is in 6 attempts or less.
