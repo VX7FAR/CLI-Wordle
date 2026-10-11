@@ -8,6 +8,7 @@
 #include "animation.h"
 using namespace std;
 
+quickascii colour;
 string guess;
 string random = "asdfg";
 
@@ -17,11 +18,11 @@ string answer_input()
     while (true)
     {
         string input = "";
-        cout<< "\033[14;1H" << "Enter word: ";
+        cout<< "\033[14;1H" << colour.yellow << "Enter word: " << colour.cyan;
         cout<<"\033[14;13H"<<"\033[K"<<"\033[14;13H";
         cin>>input;
         if(input.size() != 5){
-            cout<< "\033[15;1H" << "Word must be 5 characters only";
+            cout<< colour.red << "\033[15;1H" << "Word must be 5 characters only!";
         }
         else{
             cout<<"\033[15;1H"<<"\033[K";
@@ -65,6 +66,7 @@ int main()
                 won = false;
                 system("cls");
                 cout << "\033[H"; // Move cursor to top left
+                cout<<colour.reset;
                 printbg();
                 while (!won && attempts < 7)
                 {
@@ -81,6 +83,7 @@ int main()
                     }
                     attempts++;
                 }
+                system("cls");
             }
         }
 
