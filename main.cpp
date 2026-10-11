@@ -53,7 +53,7 @@ int main()
         for(string s:LOGO){
             std::cout<<s<<endl;
         }
-        std::cout << "Use UP/DOWN ARROW for moving and ENTER for selecting"<<endl;
+        std::cout << "Use UP/DOWN ARROW for moving and TAB for selecting"<<endl;
         if(nav > 1 || nav < 0){
             if(keypressed(VK_DOWN) || keypressed(VK_UP)){
                 nav = 0;
@@ -80,6 +80,7 @@ int main()
                     movecursor({1, 14});
                     std::cout << "                                                                                                         ";
                     movecursor({1, 14});
+                    answer = "";
                     answer = answer_input();
                     if (writeintable(answer, random, attempts))
                     {
