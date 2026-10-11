@@ -18,3 +18,6 @@ Thats all there is for you to be able to play this game.
 ## How to run?
 Runinng this is very simple, you simply download the release version and run the `.exe` file.
 Or if you have C++20 then you can simply download the source code and compile it yourself. No libraries needed!
+
+## Possible Bugs
+- After you finish the game and come back to title screen you may not see the buttons `play` and `quit` to fix that simply press the up or down arrow button and you should be good to go
