@@ -17,7 +17,9 @@ Thats all there is for you to be able to play this game.
 
 ## How to run?
 Runinng this is very simple, you simply download the release version and run the `.exe` file after extracting it.
+
 However in some cases you might get .dll missing error, to resolve that you just have to download the .dll file of whatever is missing and add it in the same folder as of the .exe
+
 Or if you have C++20 then you can simply download the source code and compile it yourself. No libraries needed!
 
 ## Possible Bugs
