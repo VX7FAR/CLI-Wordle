@@ -1,6 +1,13 @@
+#include <cstring>
 #include <iostream>
 #include <string>
+#include <vector>
+#ifdef _WIN32
 #include <windows.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+#endif
 #include<random>
 #include "game.h"
 
@@ -64,13 +71,81 @@ bool findinstring(char c, std::string str){
         if(c==s){
             return true;
         }
-        else {return false;}
+    }
+    return false;
+}
+
+#ifdef __linux__
+static termios g_orig;
+static bool g_raw = false;
+static std::string g_buf;
+
+void terminal_raw()
+{
+    std::cout << std::flush;
+    if(!g_raw) {
+        tcgetattr(STDIN_FILENO, &g_orig);
+        termios raw = g_orig;
+        raw.c_lflag &= ~(ICANON | ECHO);
+        raw.c_iflag &= ~IXON;
+        raw.c_cc[VMIN] = 0;
+        tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+        g_raw = true;
     }
 }
 
+void terminal_cooked()
+{
+    if(g_raw) {
+        g_buf.clear();
+        tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_orig);
+        g_raw = false;
+    }
+}
+
+void restoreterminal()
+{
+    terminal_cooked();
+    std::cout << "\033[0m\033[?25h" << std::flush;
+}
+#endif
+
 bool keypressed(int key)
 {
+#ifdef _WIN32
     return GetAsyncKeyState(key) & 0x8000;
+#else
+    char c;
+    while(read(STDIN_FILENO, &c, 1) == 1)
+        g_buf += c;
+    if(g_buf.size() > 64)
+        g_buf.erase(0, g_buf.size() - 64);
+
+    const char* seq;
+    size_t len;
+    if(key == VK_UP) {
+        seq = "\x1b[A";
+        len = 3;
+    }
+    else if(key == VK_DOWN) {
+        seq = "\x1b[B";
+        len = 3;
+    }
+    else if(key == VK_TAB) {
+        seq = "\t";
+        len = 1;
+    }
+    else {
+        return false;
+    }
+
+    size_t pos = g_buf.find(seq, 0, len);
+    if(pos != std::string::npos) {
+        g_buf.erase(pos, len);
+        return true;
+    }
+    return false;
+#endif
 }
 
 void movecursor(vector2 to){

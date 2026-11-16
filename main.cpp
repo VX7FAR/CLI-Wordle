@@ -1,9 +1,14 @@
 #include <iostream>
 #include <string>
+
+#ifdef _WIN32
+#include <conio.h>
 #include <windows.h>
+#endif
+
 #include <chrono>
 #include <thread>
-#include <conio.h>
+
 #include "game.h"
 #include "animation.h"
 #include <stdlib.h>
@@ -16,10 +21,14 @@ string answer_input()
 {
     while (true)
     {
+        terminal_cooked(); // for cin >>
         string input = "";
         std::cout<< "\033[14;1H" << colour.yellow << "Enter word: " << colour.cyan;
         std::cout<<"\033[14;13H"<<"\033[K"<<"\033[14;13H";
+        std::cout << std::flush;
         cin>>input;
+        cin.ignore(10000, '\n');
+        terminal_raw(); // "raw" mode for arrow key polling
         std::cout<<"\033[J"<<endl;
         if(input.size() != 5){
             std::cout<< colour.red << "\033[15;1H" << "Word must be 5 characters only!";
@@ -35,9 +44,28 @@ string answer_input()
 // input at 12,15
 // error at 1,16
 
+#ifdef _WIN32
+void enableANSI()
+{
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD dwMode = 0;
+    GetConsoleMode(hOut, &dwMode);
+    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    SetConsoleMode(hOut, dwMode);
+}
+#endif
+
 int main()
 {
-    system("cls");
+#ifdef _WIN32
+    enableANSI();
+#else
+    // raw terminal mode
+    atexit(restoreterminal);
+    terminal_raw();
+#endif
+    // system("cls");
+    std::cout << "\033[2J\033[H" << std::flush; // clear via ansi escape codes instead of system() call
     string user_input;
     string answer;
     string random;
@@ -70,7 +98,7 @@ int main()
                 answer = "";
                 attempts = 1;
                 won = false;
-                system("cls");
+                std::cout << "\033[2J\033[H" << std::flush; // clear via ansi escape codes instead of system() call
                 random = pool[randomgen(0, pool.size() - 1)];
                 std::cout << "\033[H"; // Move cursor to top left
                 std::cout<<colour.reset;
@@ -91,11 +119,13 @@ int main()
                     }
                     attempts++;
                 }
-                system("cls");
+
+                std::cout << "\033[2J\033[H" << std::flush; // clear via ansi escape codes instead of system() call
                 nav = 100;
             }
             if (nav == 1){
-                system("cls");
+                std::cout << "\033[2J\033[H" << std::flush; // clear via ansi escape codes instead of system() call
+
                 std::cout<<colour.reset;
                 exit(0);
             }
