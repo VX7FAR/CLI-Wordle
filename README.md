@@ -16,11 +16,18 @@ You start by taking a random or a calculated guess if your guess is correct then
 Thats all there is for you to be able to play this game.
 
 ## How to run?
-Runinng this is very simple, you simply download the release version and run the `.exe` file after extracting it.
+Runinng this is very simple, for windows you simply download the release version and run the `.exe` file after extracting it.
+
+For linux extract the linux specific file and run the binary.
 
 However in some cases you might get .dll missing error, to resolve that you just have to download the .dll file of whatever is missing and add it in the same folder as of the .exe
 
 Or if you have C++20 then you can simply download the source code and compile it yourself. No libraries needed!
+
+With the folder in your terminal execute the command (works with MinGW compiler) :
+```
+g++ -std=c++20 main.cpp game.cpp animation.cpp -o CLIWordle.exe
+```
 
 ## Possible Bugs
 I am gonna work a bit more of this game to add more features, meanwhile you are very likely to run into some bugs like:
@@ -28,3 +35,6 @@ I am gonna work a bit more of this game to add more features, meanwhile you are 
 - Sometimes after playing a bit, you may see the input text already present.
 
 And some more.........i think....
+
+## Credits
+- Thanks to [torkel](https://github.com/torkelicious) for making it *linux-able*.
