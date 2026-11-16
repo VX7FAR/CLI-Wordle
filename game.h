@@ -1,6 +1,14 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include<vector>
+
+// Virtual key codes
+#ifndef VK_TAB
+#define VK_TAB 9
+#define VK_UP 38
+#define VK_DOWN 40
+#endif
 
 extern std::string bg[];
 
@@ -34,6 +42,10 @@ bool findinstring(char c, std::string str);
 void movecursor(vector2 to);
 
 bool keypressed(int key);
+
+void terminal_raw();
+void terminal_cooked();
+void restoreterminal();
 
 bool booleaninput(std::string in);
 
