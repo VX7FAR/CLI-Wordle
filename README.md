@@ -17,10 +17,12 @@ Thats all there is for you to be able to play this game.
 
 ## How to run?
 Runinng this is very simple, you simply download the release version and run the `.exe` file.
+However in some cases you might get .dll missing error, to resolve that you just have to download the .dll file of whatever is missing and add it in the same folder as of the .exe
 Or if you have C++20 then you can simply download the source code and compile it yourself. No libraries needed!
 
 ## Possible Bugs
 I am gonna work a bit more of this game to add more features, meanwhile you are very likely to run into some bugs like:
 - After you finish the game and come back to title screen you may not see the buttons `play` and `quit` to fix that simply press the up or down arrow button and you should be good to go
+- Sometimes after playing a bit, you may see the input text already present.
 
 And some more.........i think....
